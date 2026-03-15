@@ -30,10 +30,24 @@
 // console.log("PLANItAll ready")
 
 
+// import "./styles/main.css";
+// import { createHeader } from "./components/header.js";
+
+// const header = createHeader();
+// document.body.appendChild(header);
+
+// console.log("PlanItAll ready");
+
 import "./styles/main.css";
 import { createHeader } from "./components/header.js";
 
-const header = createHeader();
-document.body.appendChild(header);
+const app = document.getElementById("app");
+
+const header = createHeader(
+  "PlanItAll",
+  "Organize your life. Execute your plans."
+);
+
+app.appendChild(header);
 
 console.log("PlanItAll ready");
