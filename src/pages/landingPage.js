@@ -14,6 +14,26 @@
 //   return container;
 // }
 
+// import { createHeader } from "../components/header.js";
+// import { createHeroSection } from "../components/heroSection.js";
+
+// export function renderLandingPage() {
+//   const container = document.createElement("div");
+//   container.className = "landing-page";
+
+//   const header = createHeader(
+//     "PlanItAll",
+//     "Organize your life. Execute your plans."
+//   );
+
+//   const heroSection = createHeroSection();
+
+//   container.appendChild(header);
+//   container.appendChild(heroSection);
+
+//   return container;
+// }
+
 import { createHeader } from "../components/header.js";
 import { createHeroSection } from "../components/heroSection.js";
 
@@ -26,7 +46,9 @@ export function renderLandingPage() {
     "Organize your life. Execute your plans."
   );
 
-  const heroSection = createHeroSection();
+  const heroSection = createHeroSection(() => {
+    console.log("Get Started clicked");
+  });
 
   container.appendChild(header);
   container.appendChild(heroSection);
