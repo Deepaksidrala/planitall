@@ -52,13 +52,26 @@
 
 // console.log("PlanItAll ready");
 
+// import "./styles/main.css";
+// import { renderLandingPage } from "./pages/landingPage.js";
+
+// const app = document.getElementById("app");
+
+
+// const landingPage = renderLandingPage();
+
+// app.appendChild(landingPage);
+
+// console.log("PlanItAll ready");
+
 import "./styles/main.css";
+import { render } from "./utils/render.js";
 import { renderLandingPage } from "./pages/landingPage.js";
 
 const app = document.getElementById("app");
 
 const landingPage = renderLandingPage();
 
-app.appendChild(landingPage);
+render(app, landingPage);
 
 console.log("PlanItAll ready");
