@@ -38,16 +38,27 @@
 
 // console.log("PlanItAll ready");
 
+// import "./styles/main.css";
+// import { createHeader } from "./components/header.js";
+
+// const app = document.getElementById("app");
+
+// const header = createHeader(
+//   "PlanItAll",
+//   "Organize your life. Execute your plans."
+// );
+
+// app.appendChild(header);
+
+// console.log("PlanItAll ready");
+
 import "./styles/main.css";
-import { createHeader } from "./components/header.js";
+import { renderLandingPage } from "./pages/landingPage.js";
 
 const app = document.getElementById("app");
 
-const header = createHeader(
-  "PlanItAll",
-  "Organize your life. Execute your plans."
-);
+const landingPage = renderLandingPage();
 
-app.appendChild(header);
+app.appendChild(landingPage);
 
 console.log("PlanItAll ready");
