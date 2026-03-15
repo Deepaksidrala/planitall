@@ -64,14 +64,22 @@
 
 // console.log("PlanItAll ready");
 
+// import "./styles/main.css";
+// import { render } from "./utils/render.js";
+// import { renderLandingPage } from "./pages/landingPage.js";
+
+// const app = document.getElementById("app");
+
+// const landingPage = renderLandingPage();
+
+// render(app, landingPage);
+
+// console.log("PlanItAll ready");
+
 import "./styles/main.css";
-import { render } from "./utils/render.js";
+import { navigate } from "./utils/navigate.js";
 import { renderLandingPage } from "./pages/landingPage.js";
 
-const app = document.getElementById("app");
-
-const landingPage = renderLandingPage();
-
-render(app, landingPage);
+navigate(renderLandingPage);
 
 console.log("PlanItAll ready");
