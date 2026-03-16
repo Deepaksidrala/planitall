@@ -124,7 +124,81 @@
 //   return container;
 // }
 
+// import { createHeader } from "../components/header.js";
+// import { getCurrentEvent } from "../features/events/eventStore.js";
+// import { navigate } from "../utils/navigate.js";
+
+// import { createTaskInput } from "../features/tasks/createTaskInput.js";
+// import { getTasks } from "../features/tasks/taskStore.js";
+// import { createTaskList } from "../features/tasks/taskList.js";
+
+// import { createExpenseInput } from "../features/budget/createExpenseInput.js";
+// import { getExpenses } from "../features/budget/budgetStore.js";
+// import { createExpenseList } from "../features/budget/expenseList.js";
+
+// import { createVendorInput } from "../features/vendors/createVendorInput.js";
+// import { getVendors } from "../features/vendors/vendorStore.js";
+// import { createVendorList } from "../features/vendors/vendorList.js";
+
+// export function renderEventPage() {
+//   const container = document.createElement("div");
+//   container.className = "event-page";
+
+//   const header = createHeader(
+//     "Event Details",
+//     "Manage your event"
+//   );
+
+//   const event = getCurrentEvent();
+
+//   const eventTitle = document.createElement("h2");
+//   eventTitle.textContent = event ? event.name : "No Event Selected";
+
+//   // TASKS
+//   const taskInput = createTaskInput(() => {
+//     navigate(renderEventPage);
+//   });
+
+//   const tasks = getTasks();
+//   const taskList = createTaskList(tasks, () => {
+//     navigate(renderEventPage);
+//   });
+
+//   // EXPENSES
+//   const expenseInput = createExpenseInput(() => {
+//     navigate(renderEventPage);
+//   });
+
+//   const expenses = getExpenses();
+//   const expenseList = createExpenseList(expenses);
+
+//   // VENDORS
+//   const vendorInput = createVendorInput(() => {
+//     navigate(renderEventPage);
+//   });
+
+//   const vendors = getVendors();
+//   const vendorList = createVendorList(vendors);
+
+//   container.appendChild(header);
+//   container.appendChild(eventTitle);
+
+//   container.appendChild(taskInput);
+//   container.appendChild(taskList);
+
+//   container.appendChild(expenseInput);
+//   container.appendChild(expenseList);
+
+//   container.appendChild(vendorInput);
+//   container.appendChild(vendorList);
+
+//   return container;
+// }
+
+
 import { createHeader } from "../components/header.js";
+import { createTabs } from "../components/tabNavigation.js";
+
 import { getCurrentEvent } from "../features/events/eventStore.js";
 import { navigate } from "../utils/navigate.js";
 
@@ -140,6 +214,8 @@ import { createVendorInput } from "../features/vendors/createVendorInput.js";
 import { getVendors } from "../features/vendors/vendorStore.js";
 import { createVendorList } from "../features/vendors/vendorList.js";
 
+let activeTab = "tasks";
+
 export function renderEventPage() {
   const container = document.createElement("div");
   container.className = "event-page";
@@ -154,43 +230,55 @@ export function renderEventPage() {
   const eventTitle = document.createElement("h2");
   eventTitle.textContent = event ? event.name : "No Event Selected";
 
-  // TASKS
-  const taskInput = createTaskInput(() => {
+  const tabs = createTabs(activeTab, (tab) => {
+    activeTab = tab;
     navigate(renderEventPage);
   });
-
-  const tasks = getTasks();
-  const taskList = createTaskList(tasks, () => {
-    navigate(renderEventPage);
-  });
-
-  // EXPENSES
-  const expenseInput = createExpenseInput(() => {
-    navigate(renderEventPage);
-  });
-
-  const expenses = getExpenses();
-  const expenseList = createExpenseList(expenses);
-
-  // VENDORS
-  const vendorInput = createVendorInput(() => {
-    navigate(renderEventPage);
-  });
-
-  const vendors = getVendors();
-  const vendorList = createVendorList(vendors);
 
   container.appendChild(header);
   container.appendChild(eventTitle);
+  container.appendChild(tabs);
 
-  container.appendChild(taskInput);
-  container.appendChild(taskList);
+  // TASK TAB
+  if (activeTab === "tasks") {
+    const taskInput = createTaskInput(() => {
+      navigate(renderEventPage);
+    });
 
-  container.appendChild(expenseInput);
-  container.appendChild(expenseList);
+    const tasks = getTasks();
+    const taskList = createTaskList(tasks, () => {
+      navigate(renderEventPage);
+    });
 
-  container.appendChild(vendorInput);
-  container.appendChild(vendorList);
+    container.appendChild(taskInput);
+    container.appendChild(taskList);
+  }
+
+  // BUDGET TAB
+  if (activeTab === "budget") {
+    const expenseInput = createExpenseInput(() => {
+      navigate(renderEventPage);
+    });
+
+    const expenses = getExpenses();
+    const expenseList = createExpenseList(expenses);
+
+    container.appendChild(expenseInput);
+    container.appendChild(expenseList);
+  }
+
+  // VENDORS TAB
+  if (activeTab === "vendors") {
+    const vendorInput = createVendorInput(() => {
+      navigate(renderEventPage);
+    });
+
+    const vendors = getVendors();
+    const vendorList = createVendorList(vendors);
+
+    container.appendChild(vendorInput);
+    container.appendChild(vendorList);
+  }
 
   return container;
 }
